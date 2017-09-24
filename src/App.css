@@ -92,4 +92,10 @@
 .button-active {
     border-radius: 0;
     border-bottom: 1px solid #38BB6C;
+    font-weight: bold;
+}
+
+.fa-spinner {
+    font-size: 1.6em;
+    padding: 6px 0 6px 0;
 }
