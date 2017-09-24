@@ -6,7 +6,7 @@ import logo from './logo.svg';
 import './App.css';
 
 
-const BASE_URL = 'https://hn.algolia.com/api/v1/';
+const BASE_URL = '//hn.algolia.com/api/v1/';
 const PATH_SEARCH = 'search';
 const PARAM_SEARCH = 'query=';
 
