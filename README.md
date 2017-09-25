@@ -98,7 +98,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 - [Something Missing?](#something-missing)
 
 ## Demo
-[https://han-hackernews.herokuapp.com/](https://han-hackernews.herokuapp.com/)
+<a href="https://han-hackernews.herokuapp.com" target="_blank"></a>
 
 ## Updating to New Releases
 
