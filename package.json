@@ -1,6 +1,5 @@
 {
   "name": "my-hackernews",
-  "main": "lib/index.js",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,15 +12,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && babel src/ -d lib/",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "prepublish": "npm run build",
-    "flow": "flow"
+    "eject": "react-scripts eject"
   },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.55.0"
-  }
+  "devDependencies": {}
 }
