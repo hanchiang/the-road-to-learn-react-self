@@ -26,13 +26,18 @@ const updateSearchTopStorieeState = (hits, page) => (prevState) => {
 
     const oldHits = results && results[searchKey] ? results[searchKey].hits : [];
     const updatedHits = [...oldHits, ...hits];
-
-    return {
+    const updatedResults = {
+        // Copy the entire results object, then overwrite the searchKey result property with the updated hits
         results: {
-            // Copy the entire results object, then overwrite the searchKey result property with the updated hits
             ...results,
             [searchKey]: {hits: updatedHits, page}
-        },
+        }
+    };
+
+    sessionStorage.setItem('results', JSON.stringify(updatedResults['results']));
+
+    return {
+        results: updatedResults['results'],
         isLoading: false
     };
 }
@@ -59,8 +64,14 @@ class App extends Component {
 
         const {searchTerm} = this.state;
         this.setState({searchKey: searchTerm});
-        this.fetchTopStories(searchTerm, DEFAULT_PAGE);
-    }
+
+        const results = JSON.parse(sessionStorage.getItem('results'));
+        if (results) {
+            this.setState({results});
+        } else {
+            this.fetchTopStories(searchTerm, DEFAULT_PAGE);
+        }
+    }   
 
     setTopStories(response) {
         console.log(response);
