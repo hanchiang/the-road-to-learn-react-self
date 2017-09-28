@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import logo from '../../logo.svg';
 import './App.css';
 
@@ -21,23 +21,20 @@ const withLoading = (Component) => (props) =>
 
 const ButtonWithLoading = withLoading(Button);
 
-const updateSearchTopStorieeState = (hits, page) => (prevState) => {
+const updateSearchTopStoriesState = (hits, page) => (prevState) => {
     const {searchKey, results} = prevState;
 
     const oldHits = results && results[searchKey] ? results[searchKey].hits : [];
     const updatedHits = [...oldHits, ...hits];
     const updatedResults = {
-        // Copy the entire results object, then overwrite the searchKey result property with the updated hits
-        results: {
-            ...results,
-            [searchKey]: {hits: updatedHits, page}
-        }
-    };
+    	...results,
+        [searchKey]: {hits: updatedHits, page}
+    }
 
-    sessionStorage.setItem('results', JSON.stringify(updatedResults['results']));
+    sessionStorage.setItem('results', JSON.stringify(updatedResults));
 
     return {
-        results: updatedResults['results'],
+        results: updatedResults,
         isLoading: false
     };
 }
@@ -77,7 +74,7 @@ class App extends Component {
         console.log(response);
         const {hits, page} = response;
 
-        this.setState(updateSearchTopStorieeState(hits, page));
+        this.setState(updateSearchTopStoriesState(hits, page));
     }
 
     fetchTopStories(searchTerm, page) {
