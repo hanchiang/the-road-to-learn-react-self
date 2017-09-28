@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-
-
-import PropTypes from 'prop-types';
 import logo from '../../logo.svg';
 import './App.css';
 
 // Import our codes
-import {BASE_URL, PATH_SEARCH, PARAM_SEARCH, PATH_HPP, DEFAULT_QUERY_HPP, PATH_PAGE, DEFAULT_PAGE, DEFAULT_QUERY} from '../../constants';
+import {BASE_URL, PATH_SEARCH, PARAM_SEARCH, PATH_HPP, DEFAULT_QUERY_HPP, PATH_PAGE, DEFAULT_PAGE, DEFAULT_QUERY} from '../../constants/constants';
 import Button from '../Button/Button';
 import Table from '../Table/Table';
 import Search from '../Search/Search';
@@ -24,6 +21,21 @@ const withLoading = (Component) => (props) =>
 
 const ButtonWithLoading = withLoading(Button);
 
+const updateSearchTopStorieeState = (hits, page) => (prevState) => {
+    const {searchKey, results} = prevState;
+
+    const oldHits = results && results[searchKey] ? results[searchKey].hits : [];
+    const updatedHits = [...oldHits, ...hits];
+
+    return {
+        results: {
+            // Copy the entire results object, then overwrite the searchKey result property with the updated hits
+            ...results,
+            [searchKey]: {hits: updatedHits, page}
+        },
+        isLoading: false
+    };
+}
 
 class App extends Component {
     constructor(props) {
@@ -52,19 +64,9 @@ class App extends Component {
 
     setTopStories(response) {
         console.log(response);
-        const {searchKey, results} = this.state;
         const {hits, page} = response;
 
-        const oldHits = results && results[searchKey] ? results[searchKey].hits : [];
-        const updatedHits = [...oldHits, ...response.hits];
-        this.setState({
-            results: {
-                // Copy the entire results object, then overwrite the searchKey result property with the updated hits
-                ...results,
-                [searchKey]: {hits: updatedHits, page}
-            },
-            isLoading: false
-        });
+        this.setState(updateSearchTopStorieeState(hits, page));
     }
 
     fetchTopStories(searchTerm, page) {

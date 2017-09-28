@@ -20,7 +20,7 @@ function Sort({onSort, sortKey, children, activeSortKey, isSortReverse}) {
 Sort.propTypes = {
 	onSort: PropTypes.func.isRequired,
 	sortKey: PropTypes.string.isRequired,
-	children: PropTypes.node.isrequired,
+	children: PropTypes.node.isRequired,
 	activeSortKey: PropTypes.string.isRequired,
 	isSortReverse: PropTypes.bool.isRequired
 };
